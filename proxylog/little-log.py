@@ -1,13 +1,14 @@
 import re, json, csv
 from time import time
+from weakref import ref
 from dateutil.parser import parse
-# from datetime import datetime
+from datetime import datetime
 import datetime
 
 logData = re.compile(r'generated (\d+) bytes in (\d+) msecs')
 # pattern_date = re.compile(r'\d{4}[-]\d{2}[-]\d{2}')
 
-lst = []
+rftimelist = []
 
 # with open("connections.log") as f:
 with open("little.log") as f:
@@ -18,34 +19,27 @@ with open("little.log") as f:
         if logs:
             bytes = logs.group(1)
             sec = logs.group(2)
-            # print(timestamp)
-
-            #2022-09-01 13:03:21.661515+00:00
-
-            # time_1 = datetime.strptime(timestamp,"%H:%M:%S")
-            # time_2 = datetime.strptime(timestamp,"%H:%M:%S")
-
-            # time_interval = time_2 - time_1
-            # print(time_interval)
-
 
             timestamp_seconds = timestamp.second
             timestamp_minutes = timestamp.minute
             timestamp_hours = timestamp.hour
 
-            time_1 = datetime.timedelta(hours= timestamp_hours , minutes=timestamp_minutes, seconds=timestamp_seconds)
-            time_2 = datetime.timedelta(hours= timestamp_hours, minutes=5, seconds=0)
-            print(time_2  - time_1)
-            # time_1 = datetime.timedelta(minutese
+            logtime = datetime.timedelta(hours= timestamp_hours , minutes=timestamp_minutes, seconds=timestamp_seconds)
+            rftimelist.append(logtime)
+
+            reftime = rftimelist[0]
+            endtime = rftimelist[-1]
+            delta = datetime.timedelta(minutes=10)
+           
+
+            while reftime < endtime:
+                print(reftime.isoformat())
+                print(reftime)
+                reftime = reftime + 10
 
 
-
-
-
-
-            # print(timestamp_seconds, timestamp_minutes)
-
-
-
-            # datax = f'{timestamp.second}:{timestamp.microsecond}'
-            # print(datax)
+            # print(reftime)
+            # reftime = datetime.timedelta(hours= timestamp_hours , minutes=timestamp_minutes, seconds=timestamp_seconds)
+            # endtime = datetime.timedelta(hours= timestamp_hours, minutes=5, seconds=0)
+            # print(time_2  - time_1)
+            # print(reftime)
