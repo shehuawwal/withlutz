@@ -9,6 +9,9 @@ logData = re.compile(r'generated (\d+) bytes in (\d+) msecs')
 # pattern_date = re.compile(r'\d{4}[-]\d{2}[-]\d{2}')
 
 rftimelist = []
+rft = []
+ll = "".join(rft)
+end_time = "14:20:06"
 
 # with open("connections.log") as f:
 with open("little.log") as f:
@@ -26,16 +29,22 @@ with open("little.log") as f:
 
             logtime = datetime.timedelta(hours= timestamp_hours , minutes=timestamp_minutes, seconds=timestamp_seconds)
             rftimelist.append(logtime)
-
-            reftime = rftimelist[0]
+        
+            rft.append(rftimelist[0])
+            # reftime = rftimelist[0]
             endtime = rftimelist[-1]
             delta = datetime.timedelta(minutes=10)
-           
+print(rft[0])
 
-            while reftime < endtime:
-                print(reftime.isoformat())
-                print(reftime)
-                reftime = reftime + 10
+# print(rft - end_time)
+
+            # t1 = datetime.datetime.strptime(reftime, "%H:%M:%S")
+
+           
+            # print(type(reftime))
+            # while reftime < endtime:
+            #     print(reftime.isoformat())
+            #     reftime = reftime + delta
 
 
             # print(reftime)
